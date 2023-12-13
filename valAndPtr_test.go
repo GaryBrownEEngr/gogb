@@ -38,3 +38,17 @@ func TestToPtr(t *testing.T) {
 	stringPtr = ToPtr("abc")
 	require.Equal(t, "abc", ToValOrZero(stringPtr))
 }
+
+func TestFirstNotZero(t *testing.T) {
+	require.Equal(t, 0, FirstNotZero(0))
+	require.Equal(t, 0, FirstNotZero(0, 0, 0))
+	require.Equal(t, 1, FirstNotZero(0, 1, 0))
+	require.Equal(t, "", FirstNotZero(""))
+	require.Equal(t, "", FirstNotZero("", "", ""))
+	require.Equal(t, "a", FirstNotZero("", "a", ""))
+
+	var f64Ptr *float64
+	require.Nil(t, FirstNotZero(nil, f64Ptr, nil, nil))
+	f64Ptr = ToPtr(1.1)
+	require.Equal(t, ToPtr(1.1), FirstNotZero(nil, f64Ptr, nil, nil))
+}

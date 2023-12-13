@@ -9,14 +9,12 @@ import (
 )
 
 func TestNewWorkerPool(t *testing.T) {
-	// Process the images.
 	jobCount := 10
 
 	results := make([]int, jobCount)
 
 	wp := NewWorkerPool(3)
 
-	// Fill the request channel with images to convert
 	for jobIndex := 0; jobIndex < jobCount; jobIndex++ {
 		localIndex := jobIndex
 		wp.AddTask(func() {

@@ -37,3 +37,15 @@ func ToFloat64OrZero[T RealNumber](in *T) float64 {
 	}
 	return float64(*in)
 }
+
+// Generic variadic function to return the first non "zero" value.
+func FirstNotZero[T comparable](inputs ...T) T {
+	var zeroVal T
+	for _, input := range inputs {
+		if input != zeroVal {
+			return input
+		}
+	}
+
+	return zeroVal
+}
